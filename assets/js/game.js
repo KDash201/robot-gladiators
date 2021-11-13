@@ -82,7 +82,7 @@ for (var i = 0; i < enemyNames.length; i++) {
     }
     // if player isn;t alive, stop the game
     else {
-        window.alert("You have lostt your robot in battle! Game Over!");
+        window.alert("You have lost your robot in battle! Game Over!");
         break;
     }
 }
