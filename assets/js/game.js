@@ -1,10 +1,3 @@
-// Game States
-// "WIN" - Player robot has defeated all enemy-robots
-//    * Fight all enemy-robots
-//    * Defeat each enemy-robot
-// "LOSE" - Player robot's health is zero or less
-
-
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -17,7 +10,6 @@ var enemyAttack = 12;
 // fight function
 
 var fight = function (enemyName) {
-    window.alert("Welcome to Robot Gladiators!");
     // repeat and execute as long as the enemy-robot is alive
     while (playerHealth > 0 && enemyHealth > 0) {
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
@@ -46,7 +38,7 @@ var fight = function (enemyName) {
         if (enemyHealth <= 0) {
             window.alert(enemyName + " has died!");
             //award player money for winning
-            player = playerMoney + 20;
+            playerMoney = playerMoney + 20;
             break;
         } else {
             window.alert(enemyName + ' still has ' + enemyHealth + ' health left.');
@@ -60,11 +52,6 @@ var fight = function (enemyName) {
         // check player's health
         if (playerHealth <= 0) {
             window.alert(playerName + " has died!");
-            // If robots like to fight ask below question
-            //ELSE end game function
-            // PROMPT question would player like to shop
-            // end game function
-            //start game function
             break;
         } else {
             window.alert(playerName + " still has " + playerHealth + " health left.");
@@ -72,9 +59,7 @@ var fight = function (enemyName) {
     }
 };
 
-//endGame();
-
-
+// fucntion to start a new game
 var startGame = function () {
     // reset player stats
     playerHealth = 100;
@@ -107,29 +92,32 @@ var startGame = function () {
                     shop();
                 }
             }
-
-            endGame();
+        }
+        else {
+            window.alert("You have lost your robot in battle! Game Over!");
+            break;
         }
     }
+    endGame();
 };
 
 
 var endGame = function () {
+    window.alert("The game has now ended.  Let's see how you did!");
+
     // if player is still alive, player wins!
     if (playerHealth > 0) {
         window.alert("great job, you've survived the game! You now have a score of " + playerMoney + ".");
-    }
-    else {
+    } else {
         window.alert("You've lost your robot in battle.");
-        var playAgainConfirm = window.confirm("Would you like to play again?");
+    }
+    var playAgainConfirm = window.confirm("Would you like to play again?");
 
-        if (playAgainConfirm) {
-            // restart the game
-            startGame();
-        }
-        else {
-            window.alert("Thank you for playing Robot Gladiators! Come back soon!");
-        }
+    if (playAgainConfirm) {
+        // restart the game
+        startGame();
+    } else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 };
 
@@ -182,29 +170,5 @@ var shop = function () {
     }
 };
 
-// fight each enemy-robot by looping over them and fighting them one at a time    
-var startGame = function () {
-    for (var i = 0; i < enemyNames.length; i++) {
-        if (playerHealth > 0) {
-            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-
-            // pick new enemy to fight based on the index of the enemyNames array
-            var pickedEnemyName = enemyNames[i];
-            // reset enemyHealth before starting new fight
-            enemyHealth = 50;
-
-            // use debugger to pause script from running and check what's going on at that moment in the code
-            // debugger;
-
-            // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
-            fight(pickedEnemyName);
-        }
-        // if player isn;t alive, stop the game
-        else {
-            window.alert("You have lost your robot in battle! Game Over!");
-            break;
-        }
-    }
-}
+// start first game when page loads
 startGame();
-
